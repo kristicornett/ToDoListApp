@@ -46,11 +46,13 @@ function App() {
   return (
   <>
     <h1 className='title'>To Do List</h1>
-    <ToDoList doThings={doThings} toggleDoThing={toggleDoThing}/>
-    <input ref={doThingRef} type='text' />
+    <input className='box' ref={doThingRef} type='text' />
+    <div className='wrapper'>
     <button className='btn' onClick={handleDoThing}>Add To Do</button>
     <button className='btn' onClick={() => handleClearThings(doThings.id)}>Clear</button>
-    <div>{doThings.filter(doThing => !doThing.complete).length}items left</div>
+    </div>
+    <ToDoList doThings={doThings} toggleDoThing={toggleDoThing}/>
+    <div className='items-left'>{doThings.filter(doThing => !doThing.complete).length} item{doThings.filter(doThing => !doThing.complete).length != 1 ? 's' : ''} left</div>
     </>
   )
 }

@@ -7,10 +7,15 @@ export const ToDo = ({ doThings, toggleDoThing }) => {
     }
     return (
         <div>
-        <label>
-            <input type='checkbox' checked={doThings.complete} onClick={handleDoThingClick}/>
+            <ul className='list'>
+            <li className='list-item'>
+        <label className='label'>
+            <input className='checkbox' type='checkbox' checked={doThings.complete} onClick={handleDoThingClick}/>
             </label>
+            
             {doThings.name}
+            </li>
+            </ul>
         </div>
     )
 }
