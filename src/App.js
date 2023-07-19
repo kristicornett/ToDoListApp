@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ToDoList } from './ToDoList';
+import './App.css'
 
 const local_storage_key = 'doThingsApp.doThings'
 
@@ -27,13 +28,29 @@ function App() {
       doThingRef.current.value = '';
     }
   };
+
+
+  const toggleDoThing = (id) => {
+    const newDoThings = [...doThings]
+    const doThing = newDoThings.find(doThing => doThing.id === id)
+    doThing.complete = !doThing.complete
+    setDoThings(newDoThings)
+    
+  }
+
+  const handleClearThings = (id) => {
+    const newDoThings = doThings.filter(doThing => !doThing.complete)
+    setDoThings(newDoThings)
+  }
+
   return (
   <>
-    <ToDoList doThings={doThings}/>
+    <h1 className='title'>To Do List</h1>
+    <ToDoList doThings={doThings} toggleDoThing={toggleDoThing}/>
     <input ref={doThingRef} type='text' />
-    <button onClick={handleDoThing}>Add To Do</button>
-    <button>Clear</button>
-    <div>0 items left</div>
+    <button className='btn' onClick={handleDoThing}>Add To Do</button>
+    <button className='btn' onClick={() => handleClearThings(doThings.id)}>Clear</button>
+    <div>{doThings.filter(doThing => !doThing.complete).length}items left</div>
     </>
   )
 }
